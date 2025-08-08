@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { SideBar } from "@/components/SideBar";
+import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 
 export const Layout = () => {
+  const { currentUser } = useCurrentUserStore();
+
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
+
+  console.log(currentUser);
+
+  if (!currentUser) return <Navigate replace to="/signin" />;
 
   return (
     <div className="flex h-full">

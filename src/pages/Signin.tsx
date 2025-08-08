@@ -1,18 +1,23 @@
 import { useState } from "react";
-import { authRepository } from "@/modules/auth/auth.repository";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import { FormInput } from "@/components/Form/FormInput";
+import { authRepository } from "@/modules/auth/auth.repository";
+import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // ストア読み込み
+  const currentUserStore = useCurrentUserStore();
 
   const signin = async () => {
     const user = await authRepository.signin(email, password);
-    console.log("ログイン成功:", user);
+    // ログイン成功時にユーザーデータをストアに保存
+    currentUserStore.set(user);
   };
+
+  // 既にログインしている場合はホームへリダイレクト
+  if (currentUserStore.currentUser) return <Navigate replace to="/" />;
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-10 sm:px-6 lg:px-8">
