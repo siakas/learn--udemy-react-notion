@@ -9,9 +9,9 @@ const Signup = () => {
 
   const signup = async () => {
     const user = await authRepository.signup(name, email, password);
-    // ストアセット
+    console.log("ユーザー登録成功:", user);
+    // ストアの存在チェック
   };
-  // ストアの存在チェック
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-10 sm:px-6 lg:px-8">
