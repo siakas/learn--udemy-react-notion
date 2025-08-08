@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { authRepository } from "@/modules/auth/auth.repository";
 
+import { FormInput } from "@/components/Form/FormInput";
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,65 +25,28 @@ const Signup = () => {
           <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
             <div className="space-y-6">
               <div>
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  ユーザー名
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="ユーザー名"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-slate-500 focus:ring-slate-500 focus:outline-none sm:text-sm"
-                  />
-                </div>
+                <FormInput
+                  id="username"
+                  label="ユーザー名"
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
-
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  メールアドレス
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="メールアドレス"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-slate-500 focus:ring-slate-500 focus:outline-none sm:text-sm"
-                  />
-                </div>
+                <FormInput
+                  id="email"
+                  label="メールアドレス"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  パスワード
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="パスワード"
-                    required
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-slate-500 focus:ring-slate-500 focus:outline-none sm:text-sm"
-                  />
-                </div>
+                <FormInput
+                  id="password"
+                  label="パスワード"
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
-
               <div>
                 <button
                   disabled={!name || !email || !password}
