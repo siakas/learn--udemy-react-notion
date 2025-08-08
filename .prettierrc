@@ -27,6 +27,7 @@
     "^@/features/(.*)$",
     "^@/components/shadcn-ui/(.*)$",
     "^@/components/(.*)$",
+    "^@/pages/(.*)$",
     "^@/styles/(.*)$",
     "^@/app/(.*)$",
     "^@/(.*)$",

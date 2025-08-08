@@ -10,8 +10,6 @@ export const Layout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
 
-  console.log(currentUser);
-
   if (!currentUser) return <Navigate replace to="/signin" />;
 
   return (
