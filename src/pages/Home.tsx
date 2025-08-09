@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 const Home = () => {
   const [title, setTitle] = useState("");
@@ -15,17 +17,16 @@ const Home = () => {
       </CardHeader>
       <CardContent className="px-4">
         <div className="flex items-center gap-2">
-          <input
+          <Input
             type="text"
-            className="block w-full flex-1 appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-slate-500 focus:ring-slate-500 focus:outline-none sm:text-sm"
             placeholder="ノートのタイトルを入力"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <button className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-slate-900">
+          <Button>
             <Plus className="size-4" />
-            <span className="ml-1">ノートを作成</span>
-          </button>
+            ノートを作成
+          </Button>
         </div>
       </CardContent>
     </Card>
