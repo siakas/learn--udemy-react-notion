@@ -17,7 +17,7 @@ export const SideBar = ({ onSearchButtonClicked }: Props) => {
 
   return (
     <>
-      <aside className="relative flex h-full w-60 flex-col overflow-y-auto bg-neutral-100">
+      <aside className="relative flex min-h-screen w-60 flex-col overflow-y-auto bg-neutral-100">
         <div>
           <div>
             <UserItem user={currentUserStore.currentUser!} signout={signout} />
