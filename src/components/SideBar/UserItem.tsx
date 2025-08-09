@@ -21,7 +21,7 @@ export const UserItem = ({ user, signout }: Props) => {
       <DropdownMenuTrigger asChild>
         <div
           role="button"
-          className="hover:bg-primary/5 flex w-full cursor-pointer items-center p-3 text-sm"
+          className="hover:bg-primary/5 flex w-full cursor-pointer items-center justify-between p-3 text-sm"
         >
           <div className="flex max-w-[150px] items-center gap-x-2">
             <span className="line-clamp-1 text-start font-medium">

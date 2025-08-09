@@ -4,9 +4,18 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useCurrentUserStore } from "@/modules/auth/current-user.state";
+import { noteRepository } from "@/modules/notes/note.repository";
 
 const Home = () => {
   const [title, setTitle] = useState("");
+  const { currentUser } = useCurrentUserStore();
+
+  const createNote = async () => {
+    const newNote = await noteRepository.create(currentUser!.id, { title });
+    setTitle("");
+    console.log("新しいノートが作成されました:", newNote);
+  };
 
   return (
     <Card className="m-auto w-1/2 gap-0 border-0 shadow-none">
@@ -23,7 +32,7 @@ const Home = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Button>
+          <Button onClick={createNote} disabled={!title.trim()}>
             <Plus className="size-4" />
             ノートを作成
           </Button>
