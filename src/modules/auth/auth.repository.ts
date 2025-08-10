@@ -13,7 +13,7 @@ export const authRepository = {
     if (error !== null || data.user === null) throw new Error(error?.message);
     return {
       ...data.user,
-      userName: data.user.user_metadata.name,
+      userName: data.user.user_metadata.name as string,
     };
   },
 
@@ -26,7 +26,7 @@ export const authRepository = {
     if (error !== null || data.user === null) throw new Error(error?.message);
     return {
       ...data.user,
-      userName: data.user.user_metadata.name,
+      userName: data.user.user_metadata.name as string,
     };
   },
 
@@ -37,7 +37,7 @@ export const authRepository = {
     if (data.session === null) return;
     return {
       ...data.session.user,
-      userName: data.session.user.user_metadata.name,
+      userName: data.session.user.user_metadata.name as string,
     };
   },
 

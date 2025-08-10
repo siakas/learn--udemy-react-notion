@@ -1,5 +1,8 @@
 import type { ChangeEvent } from "react";
 
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
 type Props = {
   id: string;
   label: string;
@@ -18,21 +21,16 @@ export const FormInput = ({
   onChange,
 }: Props) => {
   return (
-    <>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
-        {label}
-      </label>
-      <div className="mt-1">
-        <input
-          type={type}
-          name={id}
-          id={id}
-          onChange={onChange}
-          placeholder={placeholder ?? label}
-          required={required}
-          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:border-slate-500 focus:ring-slate-500 focus:outline-none sm:text-sm"
-        />
-      </div>
-    </>
+    <div className="grid w-full max-w-sm items-center gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Input
+        type={type}
+        name={id}
+        id={id}
+        onChange={onChange}
+        placeholder={placeholder ?? label}
+        required={required}
+      />
+    </div>
   );
 };

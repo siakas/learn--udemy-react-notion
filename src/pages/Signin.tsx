@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 
 import { AuthLayout } from "@/components/Auth/AuthLayout";
 import { FormInput } from "@/components/Form/FormInput";
+import { Button } from "@/components/ui/button";
 import { authRepository } from "@/modules/auth/auth.repository";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 
@@ -40,13 +41,13 @@ const Signin = () => {
           />
         </div>
         <div>
-          <button
+          <Button
             disabled={!email || !password}
             onClick={signin}
-            className="flex w-full cursor-pointer justify-center rounded-md border border-transparent bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-slate-900"
+            className="w-full"
           >
             ログイン
-          </button>
+          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           登録は
