@@ -1,6 +1,10 @@
+import type { MouseEvent } from "react";
+
 import { cn } from "@/lib/utils";
 
 import { NoteItem } from "@/components/NoteList/NoteItem";
+import { useCurrentUserStore } from "@/modules/auth/current-user.state";
+import { noteRepository } from "@/modules/notes/note.repository";
 import { useNoteStore } from "@/modules/notes/note.state";
 
 type Props = {
@@ -11,6 +15,13 @@ type Props = {
 export const NoteList = ({ layer = 0, parentId }: Props) => {
   const noteStore = useNoteStore();
   const notes = noteStore.getAll();
+  const { currentUser } = useCurrentUserStore();
+
+  const createChild = async (e: MouseEvent, parentId: number) => {
+    e.stopPropagation();
+    const newNote = await noteRepository.create(currentUser!.id, { parentId });
+    noteStore.set([newNote]);
+  };
 
   return (
     <>
@@ -25,7 +36,11 @@ export const NoteList = ({ layer = 0, parentId }: Props) => {
       </p>
       {notes.map((note) => (
         <div key={note.id}>
-          <NoteItem note={note} layer={layer} />
+          <NoteItem
+            note={note}
+            layer={layer}
+            onCreate={(e) => createChild(e, note.id)}
+          />
         </div>
       ))}
     </>
