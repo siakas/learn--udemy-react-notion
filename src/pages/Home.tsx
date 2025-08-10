@@ -6,13 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 import { noteRepository } from "@/modules/notes/note.repository";
+import { useNoteStore } from "@/modules/notes/note.state";
 
 const Home = () => {
   const [title, setTitle] = useState("");
   const { currentUser } = useCurrentUserStore();
+  const noteStore = useNoteStore();
 
   const createNote = async () => {
     const newNote = await noteRepository.create(currentUser!.id, { title });
+    noteStore.set([newNote]);
     setTitle("");
     console.log("新しいノートが作成されました:", newNote);
   };
