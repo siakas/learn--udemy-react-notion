@@ -17,7 +17,6 @@ const Home = () => {
     const newNote = await noteRepository.create(currentUser!.id, { title });
     noteStore.set([newNote]);
     setTitle("");
-    console.log("新しいノートが作成されました:", newNote);
   };
 
   return (

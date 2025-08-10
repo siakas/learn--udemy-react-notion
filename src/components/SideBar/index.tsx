@@ -1,5 +1,6 @@
 import { Plus, Search } from "lucide-react";
 
+import { NoteList } from "@/components/NoteList";
 import { Item } from "@/components/SideBar/Item";
 import { UserItem } from "@/components/SideBar/UserItem";
 import { authRepository } from "@/modules/auth/auth.repository";
@@ -38,7 +39,7 @@ export const SideBar = ({ onSearchButtonClicked }: Props) => {
             <Item label="検索" icon={Search} onClick={onSearchButtonClicked} />
           </div>
           <div className="mt-4">
-            <div>ノートリスト</div>
+            <NoteList />
             <Item label="ノートを作成" icon={Plus} onClick={createNote} />
           </div>
         </div>

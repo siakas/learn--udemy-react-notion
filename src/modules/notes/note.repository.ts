@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 
-// 新規ノートを作成
 export const noteRepository = {
+  // 新規ノートを作成
   async create(userId: string, params: { title?: string; parentId?: number }) {
     const { data, error } = await supabase
       .from("notes")
@@ -15,6 +15,25 @@ export const noteRepository = {
       .select()
       .single();
     if (error !== null) throw new Error(error.message);
+
+    return data;
+  },
+
+  // ノートを取得
+  async find(userId: string, parentDocumentId?: number) {
+    const query = supabase
+      .from("notes")
+      .select()
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+
+    // 親ノートがある場合は子ノートを取得
+    // 親ノートがない場合はトップレベルのノートを取得
+    const { data } =
+      parentDocumentId !== undefined
+        ? await query.eq("parent_document", parentDocumentId)
+        : await query.is("parent_document", null);
+
     return data;
   },
 };
