@@ -13,8 +13,11 @@ export const useNoteStore = () => {
     setNotes((oldNotes) => unionWith(oldNotes, newNotes, isEqual));
   };
 
+  const getById = (id: number) => notes.find((note) => note.id === id);
+
   return {
     getAll: () => notes,
     set,
+    getById,
   };
 };
