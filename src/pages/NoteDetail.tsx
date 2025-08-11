@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-// import { Editor } from "@/components/Editor";
-// import { TitleInput } from "@/components/TitleInput";
+import { Editor } from "@/components/Editor";
+import { TitleInput } from "@/components/TitleInput";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
 import { noteRepository } from "@/modules/notes/note.repository";
 import { useNoteStore } from "@/modules/notes/note.state";
@@ -63,14 +63,14 @@ const NoteDetail = () => {
   if (error) return <div>{error}</div>;
 
   // ノートが見つからない場合の表示（ストア内に存在しない）
-  if (note === null) return <div>ノートが見つかりません</div>;
+  if (note === null || note === undefined)
+    return <div>ノートが見つかりません</div>;
 
   return (
     <div className="pt-20 pb-40">
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
-        <p>{id}</p>
-        {/* <TitleInput />
-        <Editor /> */}
+        <TitleInput initialData={note} onTitleChange={() => {}} />
+        <Editor />
       </div>
     </div>
   );
