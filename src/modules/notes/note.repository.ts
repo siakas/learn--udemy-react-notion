@@ -52,4 +52,18 @@ export const noteRepository = {
 
     return data;
   },
+
+  // ノートを更新
+  async update(noteId: number, note: { title?: string; content?: string }) {
+    const { data, error } = await supabase
+      .from("notes")
+      .update(note)
+      .eq("id", noteId)
+      .select()
+      .single();
+
+    if (error !== null) throw new Error(error.message);
+
+    return data;
+  },
 };

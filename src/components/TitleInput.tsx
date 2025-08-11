@@ -11,11 +11,17 @@ type Props = {
 export const TitleInput = ({ initialData, onTitleChange }: Props) => {
   const [value, setValue] = useState(initialData.title ?? "無題");
 
+  const handleInputChange = (value: string) => {
+    setValue(value);
+    onTitleChange(value);
+  };
+
   return (
     <div className="relative pl-[54px]">
       <TextAreaAutoSize
         className="resize-none bg-transparent text-5xl font-bold break-words text-[#3F3F3F] outline-none"
         value={value}
+        onChange={(e) => handleInputChange(e.target.value)}
       />
     </div>
   );

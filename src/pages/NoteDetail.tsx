@@ -49,6 +49,16 @@ const NoteDetail = () => {
     }
   }, [id, currentUser]);
 
+  const updateNote = async (
+    id: number,
+    note: { title?: string; content?: string },
+  ) => {
+    const updatedNote = await noteRepository.update(id, note);
+    if (updatedNote === null) return;
+    noteStore.set([updatedNote]);
+    return updatedNote;
+  };
+
   useEffect(() => {
     fetchById();
   }, [fetchById]);
@@ -69,7 +79,10 @@ const NoteDetail = () => {
   return (
     <div className="pt-20 pb-40">
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
-        <TitleInput initialData={note} onTitleChange={() => {}} />
+        <TitleInput
+          initialData={note}
+          onTitleChange={(title) => updateNote(id, { title })}
+        />
         <Editor />
       </div>
     </div>
