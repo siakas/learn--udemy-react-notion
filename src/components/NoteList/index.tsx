@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 import { NoteItem } from "@/components/NoteList/NoteItem";
 import { useCurrentUserStore } from "@/modules/auth/current-user.state";
+import type { Note } from "@/modules/notes/note.entity";
 import { noteRepository } from "@/modules/notes/note.repository";
 import { useNoteStore } from "@/modules/notes/note.state";
 
@@ -23,6 +24,13 @@ export const NoteList = ({ layer = 0, parentId }: Props) => {
     noteStore.set([newNote]);
   };
 
+  const fetchChildren = async (e: MouseEvent, note: Note) => {
+    e.stopPropagation();
+    const children = await noteRepository.find(currentUser!.id, note.id);
+    if (children === null) return;
+    noteStore.set(children);
+  };
+
   return (
     <>
       <p
@@ -40,6 +48,7 @@ export const NoteList = ({ layer = 0, parentId }: Props) => {
             note={note}
             layer={layer}
             onCreate={(e) => createChild(e, note.id)}
+            onExpande={(e) => fetchChildren(e, note)}
           />
         </div>
       ))}

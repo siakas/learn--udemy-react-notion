@@ -24,6 +24,7 @@ type Props = {
   isExpanded?: boolean;
   layer?: number;
   onCreate?: (event: MouseEvent) => void;
+  onExpande?: (event: MouseEvent) => void;
 };
 
 export const NoteItem = ({
@@ -31,6 +32,7 @@ export const NoteItem = ({
   isExpanded = false,
   layer = 0,
   onCreate,
+  onExpande,
 }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -85,6 +87,7 @@ export const NoteItem = ({
       <Item
         label={note.title ?? "無題"}
         icon={getIcon()}
+        onIconClick={onExpande}
         isActive={isHovered}
         trailingItem={menu}
       />
