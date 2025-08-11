@@ -55,7 +55,7 @@ const NoteDetail = () => {
   ) => {
     const updatedNote = await noteRepository.update(id, note);
     if (updatedNote === null) return;
-    noteStore.set([updatedNote]);
+    noteStore.update(updatedNote);
     return updatedNote;
   };
 
