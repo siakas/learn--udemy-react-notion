@@ -36,4 +36,16 @@ export const noteRepository = {
 
     return data;
   },
+
+  // ID からノートを取得
+  async findById(userId: string, noteId: number) {
+    const { data } = await supabase
+      .from("notes")
+      .select()
+      .eq("id", noteId)
+      .eq("user_id", userId)
+      .single();
+
+    return data;
+  },
 };
