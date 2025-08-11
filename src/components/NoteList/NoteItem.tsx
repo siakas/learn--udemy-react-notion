@@ -20,13 +20,22 @@ import {
 import type { Note } from "@/modules/notes/note.entity";
 
 type Props = {
+  /** 表示するノートオブジェクト */
   note: Note;
+  /** ノートが展開されているかどうか */
   isExpanded?: boolean;
+  /** 階層の深さ（インデント計算用） */
   layer?: number;
+  /** 子ノート作成ボタンクリック時のハンドラー */
   onCreate?: (event: MouseEvent) => void;
+  /** 展開アイコンクリック時のハンドラー */
   onExpande?: (event: MouseEvent) => void;
 };
 
+/**
+ * ノート一覧の各アイテムを表示するコンポーネント
+ * ホバー時にメニューボタンと子ノート作成ボタンを表示し、階層構造をサポート
+ */
 export const NoteItem = ({
   note,
   isExpanded = false,
@@ -36,10 +45,12 @@ export const NoteItem = ({
 }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // ノートの状態に応じてアイコンを切り替え
   const getIcon = () => {
     return isExpanded ? ChevronDown : isHovered ? ChevronRight : File;
   };
 
+  // ホバー時に表示されるメニュー（削除ボタンと子ノート作成ボタン）
   const menu = (
     <div
       className={cn(
@@ -47,6 +58,7 @@ export const NoteItem = ({
         !isHovered && "opacity-0",
       )}
     >
+      {/* ドロップダウンメニュー（削除など） */}
       <DropdownMenu>
         <DropdownMenuTrigger onClick={(e) => e.stopPropagation()}>
           <div
@@ -67,6 +79,7 @@ export const NoteItem = ({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      {/* 子ノート作成ボタン */}
       <div
         role="button"
         className="ml-auto h-full rounded-sm hover:bg-neutral-300"
@@ -82,7 +95,7 @@ export const NoteItem = ({
       role="button"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ paddingLeft: layer !== 0 ? `${layer * 12 + 12}px` : "0" }}
+      style={{ paddingLeft: layer !== 0 ? `${layer * 12}px` : "0" }} // 階層に応じたインデント
     >
       <Item
         label={note.title ?? "無題"}
